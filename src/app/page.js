@@ -1,17 +1,16 @@
+'use client';
 import React, { useState } from 'react';
-import Layout from './components/Layout';
-import Navbar from './components/Navbar';
-import FeaturesSection from './components/FeaturesSection';
-import PricingSection from './components/PricingSection';
-import TrainingHub from './components/hub/TrainingHub';
-import QuizProvider from './components/quiz/QuizProvider';
-import Footer from './components/Footer';
+import Navbar from '../components/Navbar';
+import FeaturesSection from '../components/FeaturesSection';
+import PricingSection from '../components/PricingSection';
+import TrainingHub from '../components/hub/TrainingHub';
+import QuizProvider from '../components/quiz/QuizProvider';
+import Footer from '../components/Footer';
 
 export default function App() {
-  const [view, setView] = useState('landing'); // landing, hub, or quiz
+  const [view, setView] = useState('landing'); 
   const [activeChapter, setActiveChapter] = useState(null);
   
-  // Progress State
   const [userProgress, setUserProgress] = useState({
     is_premium: false,
     questions_answered: 0,
@@ -24,13 +23,8 @@ export default function App() {
     setView('quiz');
   };
 
-  const handleFinishQuiz = () => {
-    setView('hub');
-    setActiveChapter(null);
-  };
-
   return (
-    <Layout>
+    <main className="min-h-screen bg-[#0a0a0a]">
       <Navbar 
         onLogin={() => setView('hub')} 
         isLoggedIn={view !== 'landing'} 
@@ -56,11 +50,11 @@ export default function App() {
       {view === 'quiz' && (
         <QuizProvider 
           chapterId={activeChapter} 
-          onExit={handleFinishQuiz} 
+          onExit={() => setView('hub')} 
         />
       )}
 
       <Footer />
-    </Layout>
+    </main>
   );
 }
