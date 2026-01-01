@@ -7,7 +7,7 @@ import TrainingHub from '../components/hub/TrainingHub';
 import QuizProvider from '../components/quiz/QuizProvider';
 import Footer from '../components/Footer';
 
-export default function Home() {
+export default function App() {
   const [view, setView] = useState('landing'); 
   const [activeChapter, setActiveChapter] = useState(null);
   
