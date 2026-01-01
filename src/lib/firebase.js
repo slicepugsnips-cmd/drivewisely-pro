@@ -1,17 +1,20 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhshJ5BMKQpdF2BVTkS1F5T0qt6j70jFs",
-  authDomain: "drivewisely-pro.firebaseapp.com",
-  projectId: "drivewisely-pro",
-  storageBucket: "drivewisely-pro.firebasestorage.app",
-  messagingSenderId: "764035274458",
-  appId: "1:764035274458:web:ae7d94d823bb0e7844f7e3",
-  measurementId: "G-FD9L9W82BV"
+  // PASTE YOUR ACTUAL KEYS HERE FROM YOUR FIREBASE CONSOLE
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_ID",
+  appId: "YOUR_APP_ID"
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+// This prevents the "already exists" error during build
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { app, db, auth };
